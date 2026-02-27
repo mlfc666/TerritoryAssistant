@@ -1,14 +1,14 @@
-package moe.mlfc.territory.assistant.theme
-
+package moe.mlfc.territory.assistant.ui.theme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import moe.mlfc.territory.assistant.theme.*
 
-private val MonochromeLightColorScheme = lightColorScheme(
+val MonochromeLightColorScheme = lightColorScheme(
     // 核心：主要操作和选中态使用黑色
     primary = DarkGrey,
     onPrimary = White,
-
+    primaryContainer = White,
     // 背景：使用极浅的灰色区分页面与卡片
     background = OffWhite,
     onBackground = DarkGrey,

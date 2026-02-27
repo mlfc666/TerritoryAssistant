@@ -14,7 +14,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import moe.mlfc.territory.assistant.theme.TerritoryAssistantTheme
+import moe.mlfc.territory.assistant.ui.theme.TerritoryAssistantTheme
 import org.jetbrains.compose.resources.painterResource
 
 import territory_assistant.composeapp.generated.resources.Res
