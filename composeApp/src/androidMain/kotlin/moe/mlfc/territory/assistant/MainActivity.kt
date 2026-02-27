@@ -1,4 +1,4 @@
-package moe.mlfc.onlinebot.territory_assistant
+package moe.mlfc.territory.assistant
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

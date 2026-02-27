@@ -1,4 +1,4 @@
-package moe.mlfc.onlinebot.territory_assistant
+package moe.mlfc.territory.assistant
 
 interface Platform {
     val name: String

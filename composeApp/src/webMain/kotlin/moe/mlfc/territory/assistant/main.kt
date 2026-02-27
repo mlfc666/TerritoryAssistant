@@ -1,4 +1,4 @@
-package moe.mlfc.onlinebot.territory_assistant
+package moe.mlfc.territory.assistant
 
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.window.ComposeViewport

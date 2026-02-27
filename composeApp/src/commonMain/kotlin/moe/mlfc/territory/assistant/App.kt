@@ -1,4 +1,4 @@
-package moe.mlfc.onlinebot.territory_assistant
+package moe.mlfc.territory.assistant
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image

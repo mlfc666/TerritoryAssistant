@@ -1,4 +1,4 @@
-package moe.mlfc.onlinebot.territory_assistant
+package moe.mlfc.territory.assistant
 
 class WasmPlatform : Platform {
     override val name: String = "Web with Kotlin/Wasm"

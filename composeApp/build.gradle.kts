@@ -51,11 +51,11 @@ kotlin {
 }
 
 android {
-    namespace = "moe.mlfc.onlinebot.territory_assistant"
+    namespace = "moe.mlfc.territory.assistant"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "moe.mlfc.onlinebot.territory_assistant"
+        applicationId = "moe.mlfc.territory.assistant"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1
@@ -83,11 +83,11 @@ dependencies {
 
 compose.desktop {
     application {
-        mainClass = "moe.mlfc.onlinebot.territory_assistant.MainKt"
+        mainClass = "moe.mlfc.territory.assistant.MainKt"
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "moe.mlfc.onlinebot.territory_assistant"
+            packageName = "moe.mlfc.territory.assistant"
             packageVersion = "1.0.0"
         }
     }
