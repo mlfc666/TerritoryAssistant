@@ -1,0 +1,15 @@
+getAchievementByName: SELECT * FROM achievement WHERE nameZhCN = ? LIMIT 1;
+-- Queries.sq
+
+-- 1. 插入测试数据（用于验证驱动是否能写）
+insertTestRecord:
+INSERT INTO achievement(nameZhCN, id, type)
+VALUES (:name, :id, 'TEST');
+
+-- 2. 统计总数（用于验证 2MB 数据是否进去了）
+countAchievements:
+SELECT COUNT(*) FROM achievement;
+
+-- 3. 清空表（用于重新导入数据，可选）
+clearAchievements:
+DELETE FROM achievement;

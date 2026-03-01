@@ -3,12 +3,14 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
+val globalPackageName ="moe.mlfc.territory.assistant"
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeHotReload)
+    alias(libs.plugins.sqldelight)
 }
 
 kotlin {
@@ -22,16 +24,14 @@ kotlin {
 
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
-        browser()
+        browser {
+            commonWebpackConfig {
+                }
+        }
         binaries.executable()
     }
 
     sourceSets {
-        androidMain.dependencies {
-            implementation(libs.compose.uiToolingPreview)
-            implementation(libs.androidx.activity.compose)
-            implementation(libs.androidx.core.ktx)
-        }
         commonMain.dependencies {
             implementation(libs.compose.runtime)
             implementation(libs.compose.foundation)
@@ -41,22 +41,35 @@ kotlin {
             implementation(libs.compose.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
-
-
+            implementation(libs.sqldelight.runtime)
+            implementation(libs.sqldelight.coroutines)
+        }
+        androidMain.dependencies {
+            implementation(libs.compose.uiToolingPreview)
+            implementation(libs.androidx.activity.compose)
+            implementation(libs.androidx.core.ktx)
+            implementation(libs.sqldelight.android)
         }
         jvmMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutinesSwing)
+            implementation(libs.sqldelight.desktop)
+        }
+        wasmJsMain.dependencies {
+            implementation(libs.sqldelight.web)
+            implementation(devNpm("copy-webpack-plugin", "9.1.0"))
+            implementation(npm("@cashapp/sqldelight-sqljs-worker", "2.2.1")) // 版本建议与你的 SQLDelight 插件一致
+            implementation(npm("sql.js", "1.14.0"))
         }
     }
 }
 
 android {
-    namespace = "moe.mlfc.territory.assistant"
+    namespace = globalPackageName
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "moe.mlfc.territory.assistant"
+        applicationId = globalPackageName
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1
@@ -84,12 +97,23 @@ dependencies {
 
 compose.desktop {
     application {
-        mainClass = "moe.mlfc.territory.assistant.MainKt"
+        mainClass = globalPackageName + "MainKt"
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "moe.mlfc.territory.assistant"
+            packageName = globalPackageName
             packageVersion = "1.0.0"
+        }
+    }
+}
+
+// SQLDelight 数据库配置
+sqldelight {
+    databases {
+        create("WikiDatabase") {
+            // 包名建议与你的项目包名一致
+            packageName.set(globalPackageName)
+            generateAsync.set(true) // Web 端强制要求异步
         }
     }
 }
